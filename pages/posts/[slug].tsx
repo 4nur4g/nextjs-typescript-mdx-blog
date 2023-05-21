@@ -21,7 +21,8 @@ import { postFilePaths, POSTS_PATH } from '../../utils/mdxUtils';
 // Custom components/renderers to pass to MDX.
 // Since the MDX files aren't loaded by webpack, they have no knowledge of how
 // to handle import statements. Instead, you must include components in scope
-// here.
+// here.import { Image } from 'next/image';
+
 const components = {
   Head,
   Image,
@@ -35,7 +36,7 @@ type PostPageProps = {
 
 const PostPage = ({ source, frontMatter }: PostPageProps): JSX.Element => {
   const customMeta: MetaProps = {
-    title: `${frontMatter.title} - Hunter Chang`,
+    title: `${frontMatter.title} - Anurag Pradhan`,
     description: frontMatter.description,
     image: `${WEBSITE_HOST_URL}${frontMatter.image}`,
     date: frontMatter.date,
