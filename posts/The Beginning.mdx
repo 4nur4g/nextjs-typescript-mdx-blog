@@ -1,14 +1,32 @@
 ---
-title: The Beginning
-description: How this blog progect begin
+title: The Start of My Blogging Journey
+description: How I got inspired by a podcast to create this blog
 date: '2023-05-21'
 ---
 
-Yesterday, I was listening to a podcast by Brian Douglas, founder and CEO of Open Sauced. In his early days, he started a blog similar to the blog you're reading right now.
-Where, he used to post a blog every day, mentioning what he learnt. I got inspired from him and the result is this blog.
+I have always wanted to document my learning process and share it with others. But I never had the the direction to start a blog. That changed when I listened to a podcast by Brian Douglas, the founder and CEO of Open Sauced. He talked about how he used to write a blog post every day, describing what he learned. I found his story very inspiring and decided to follow his example. And that's how this blog was born.
 
-I'll be writing my learnings here.
+In this blog, I will write about my learnings on various topics related to web development, such as Next.js, TypeScript, Tailwind CSS, Node.js, Express.js and more.
 
 ## The Project
 
-I've forked this NextJS/TS/Tailwind project from this [repository](https://github.com/ChangoMan/nextjs-typescript-mdx-blog) by Hunter Chang. I'll modifying it to my taste.
+To create this blog, I forked a Next.js/TS/Tailwind project from this [repository](https://github.com/ChangoMan/nextjs-typescript-mdx-blog) by Hunter Chang. I liked the simplicity and elegance of his design and code. I will modify it to suit my preferences and needs.
+
+## My Observation
+
+Before I started writing my own posts, I spent some time understanding how the project works. Here are some of the things I observed:
+
+- To create a new blog post, I need to create a new markdown file under the posts directory.
+- The Home page uses the `getStaticProps` function to fetch all the posts using the `getAllPosts` function. This function takes an array of fields as a parameter, such as `['date', 'description', 'slug', 'title']`.
+- The Home page component receives the posts data as a prop and renders a list of links to the posts.
+- When a user clicks on a link, they are taken to the full article, which is rendered by the `posts/[slug].tsx` file.
+- This file uses _gray matter_ to read the markdown file and separate the metadata and the content of the post.
+- The file also uses `getStaticPaths` to generate the routes for each post.
+
+## My Analysis
+
+The project uses MDX, Gray-matter, FS, MDX-serialize and other libraries to create and process the data for the blog posts. The data is then used by React components to render the pages.
+
+However, I noticed that some of the functions are not used consistently or efficiently. For example, the `getPostBySlug` function could be used in the `posts/[slug].tsx` file instead of repeating the code for reading and parsing the markdown file.
+
+I will work on improving and customizing the project as I go along. Stay tuned for more updates! 😊
