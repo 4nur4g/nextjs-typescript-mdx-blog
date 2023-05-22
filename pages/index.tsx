@@ -2,19 +2,19 @@ import { format, parseISO } from 'date-fns';
 import { GetStaticProps } from 'next';
 import Link from 'next/link';
 import React from 'react';
-import Layout from '../components/Layout';
 import { getAllPosts } from '../lib/api';
 import { PostType } from '../types/post';
-import Image from 'next/image';
+// import Image from 'next/image';
 
 type IndexProps = {
   posts: PostType[];
 };
 
 export const Index = ({ posts }: IndexProps): JSX.Element => {
+  console.log("😂", posts)
   return (
-    <Layout>
-      <div className="grid grid-cols-[max-content_max-content] gap-3">
+    <>
+      {/* <div className="grid grid-cols-[max-content_max-content] gap-3">
         <Image
           className="rounded-lg"
           src={'/images/anurag.jpg'}
@@ -26,7 +26,7 @@ export const Index = ({ posts }: IndexProps): JSX.Element => {
           <p className="m-0">Full stack/Android developer</p>
           <p className="m-0">Documenting my journey here</p>
         </div>
-      </div>
+      </div> */}
       {posts.map((post) => (
         <article key={post.slug} className="mt-12">
           <p className="mb-1 text-sm text-gray-500 dark:text-gray-400">
@@ -47,7 +47,7 @@ export const Index = ({ posts }: IndexProps): JSX.Element => {
           </p>
         </article>
       ))}
-    </Layout>
+    </>
   );
 };
 
