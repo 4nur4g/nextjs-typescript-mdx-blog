@@ -5,6 +5,7 @@ import React from 'react';
 import Layout from '../components/Layout';
 import { getAllPosts } from '../lib/api';
 import { PostType } from '../types/post';
+import Image from 'next/image';
 
 type IndexProps = {
   posts: PostType[];
@@ -13,22 +14,19 @@ type IndexProps = {
 export const Index = ({ posts }: IndexProps): JSX.Element => {
   return (
     <Layout>
-      <h1>Home Page</h1>
-      <p>Next.js starter for your next blog or personal site. Built with:</p>
-      <ul className="list-disc pl-4 my-6">
-        <li>Next.js</li>
-        <li className="mt-2">Typescript</li>
-        <li className="mt-2">MDX</li>
-        <li className="mt-2">Tailwind CSS</li>
-      </ul>
-
-      <a
-        href="https://github.com/ChangoMan/nextjs-typescript-mdx-blog"
-        className="inline-block px-7 py-3 rounded-md text-white dark:text-white bg-blue-600 hover:bg-blue-700 hover:text-white dark:hover:text-white"
-      >
-        Get the source code!
-      </a>
-
+      <div className="grid grid-cols-[max-content_max-content] gap-3">
+        <Image
+          className="rounded-lg"
+          src={'/images/anurag.jpg'}
+          width={150}
+          height={150}
+        />
+        <div className="self-end">
+          <h1 className="m-0 font-semibold text-2xl">Anuarg Pradhan</h1>
+          <p className="m-0">Full stack/Android developer</p>
+          <p className="m-0">Documenting my journey here</p>
+        </div>
+      </div>
       {posts.map((post) => (
         <article key={post.slug} className="mt-12">
           <p className="mb-1 text-sm text-gray-500 dark:text-gray-400">
