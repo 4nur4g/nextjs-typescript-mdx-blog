@@ -11,7 +11,7 @@ const MyApp = ({ Component, pageProps }: AppProps): JSX.Element => {
     <ThemeProvider attribute="class" enableSystem={false} defaultTheme="dark">
       <Head {...pageProps} />
       <Header />
-      <Component />
+      <Component {...pageProps} />
       <Footer />
     </ThemeProvider>
   );

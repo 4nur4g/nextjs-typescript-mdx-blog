@@ -11,7 +11,6 @@ type IndexProps = {
 };
 
 export const Index = ({ posts }: IndexProps): JSX.Element => {
-  console.log("😂", posts)
   return (
     <>
       {/* <div className="grid grid-cols-[max-content_max-content] gap-3">
@@ -53,7 +52,6 @@ export const Index = ({ posts }: IndexProps): JSX.Element => {
 
 export const getStaticProps: GetStaticProps = async () => {
   const posts = getAllPosts(['date', 'description', 'slug', 'title']);
-
   return {
     props: { posts },
   };
