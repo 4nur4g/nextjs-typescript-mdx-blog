@@ -14,22 +14,6 @@ However, I wanted to the width of the first column to be of the image. Using the
 
 After some searching, I came across a stack overflow answer on the same question. Finally, I used `className="grid grid-cols-[max-content_max-content] gap-3"`
 
-Here's the final result. I'll modify it over time.
-
-<div className="grid grid-cols-[max-content_max-content] gap-3">
-  <Image
-    className="rounded-lg"
-    src={'/images/anurag.jpg'}
-    width={150}
-    height={150}
-  />
-  <div className="self-end">
-    <h1 className="m-0 font-semibold text-2xl">Anuarg Pradhan</h1>
-    <p className="m-0">Full stack/Android developer</p>
-    <p className="m-0">Documenting my journey here</p>
-  </div>
-</div>
-
 In order to persist this component on route change, I had to fiddle with the project structure, so that I could wrap layouts in `_app.tsx` file. However, the project structure wasn't like that. Layouts weren't used in the \_app file.
 
 Therefore, I restructured the code by making components like Header, Footer, Blog, and placing them in \_app file.

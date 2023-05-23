@@ -3,9 +3,9 @@ import Image from 'next/image';
 
 const Intro = () => {
   return (
-    <div className="grid grid-cols-[max-content_max-content] gap-3 max-w-2xl px-8 mx-auto">
+    <div className="grid grid-cols-[max-content_auto] gap-3 max-w-2xl px-8 mx-auto ">
       <Image
-        className="rounded-lg"
+        className=" object-contain rounded-lg max-h-full"
         src={'/images/anurag.jpg'}
         width={150}
         height={150}
