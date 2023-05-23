@@ -2,10 +2,9 @@ import { format, parseISO } from 'date-fns';
 import { GetStaticProps } from 'next';
 import Link from 'next/link';
 import React from 'react';
-import Layout from '../components/Layout';
 import { getAllPosts } from '../lib/api';
 import { PostType } from '../types/post';
-import Image from 'next/image';
+// import Image from 'next/image';
 
 type IndexProps = {
   posts: PostType[];
@@ -13,20 +12,7 @@ type IndexProps = {
 
 export const Index = ({ posts }: IndexProps): JSX.Element => {
   return (
-    <Layout>
-      <div className="grid grid-cols-[max-content_max-content] gap-3">
-        <Image
-          className="rounded-lg"
-          src={'/images/anurag.jpg'}
-          width={150}
-          height={150}
-        />
-        <div className="self-end">
-          <h1 className="m-0 font-semibold text-2xl">Anuarg Pradhan</h1>
-          <p className="m-0">Full stack/Android developer</p>
-          <p className="m-0">Documenting my journey here</p>
-        </div>
-      </div>
+    <div className="max-w-2xl px-8  mx-auto">
       {posts.map((post) => (
         <article key={post.slug} className="mt-12">
           <p className="mb-1 text-sm text-gray-500 dark:text-gray-400">
@@ -47,13 +33,12 @@ export const Index = ({ posts }: IndexProps): JSX.Element => {
           </p>
         </article>
       ))}
-    </Layout>
+    </div>
   );
 };
 
 export const getStaticProps: GetStaticProps = async () => {
   const posts = getAllPosts(['date', 'description', 'slug', 'title']);
-
   return {
     props: { posts },
   };

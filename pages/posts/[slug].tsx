@@ -13,10 +13,11 @@ import rehypeCodeTitles from 'rehype-code-titles';
 import rehypePrism from 'rehype-prism-plus';
 import rehypeSlug from 'rehype-slug';
 import remarkGfm from 'remark-gfm';
-import Layout, { WEBSITE_HOST_URL } from '../../components/Layout';
 import { MetaProps } from '../../types/layout';
 import { PostType } from '../../types/post';
 import { postFilePaths, POSTS_PATH } from '../../utils/mdxUtils';
+import Blog from '../../components/Blog';
+import { WEBSITE_HOST_URL } from '../../components/Blog';
 
 // Custom components/renderers to pass to MDX.
 // Since the MDX files aren't loaded by webpack, they have no knowledge of how
@@ -35,15 +36,8 @@ type PostPageProps = {
 };
 
 const PostPage = ({ source, frontMatter }: PostPageProps): JSX.Element => {
-  const customMeta: MetaProps = {
-    title: `${frontMatter.title} - Anurag Pradhan`,
-    description: frontMatter.description,
-    image: `${WEBSITE_HOST_URL}${frontMatter.image}`,
-    date: frontMatter.date,
-    type: 'article',
-  };
   return (
-    <Layout customMeta={customMeta}>
+    <Blog>
       <article>
         <h1 className="mb-3 text-gray-900 dark:text-white">
           {frontMatter.title}
@@ -55,7 +49,7 @@ const PostPage = ({ source, frontMatter }: PostPageProps): JSX.Element => {
           <MDXRemote {...source} components={components} />
         </div>
       </article>
-    </Layout>
+    </Blog>
   );
 };
 
@@ -86,11 +80,19 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     },
     scope: data,
   });
+  const customMeta: MetaProps = {
+    title: `${data.title} - Anurag Pradhan`,
+    description: data.description,
+    image: `${WEBSITE_HOST_URL}${data.image}`,
+    date: data.date,
+    type: 'article',
+  };
 
   return {
     props: {
       source: mdxSource,
       frontMatter: data,
+      customMeta,
     },
   };
 };
