@@ -36,15 +36,8 @@ type PostPageProps = {
 };
 
 const PostPage = ({ source, frontMatter }: PostPageProps): JSX.Element => {
-  const customMeta: MetaProps = {
-    title: `${frontMatter.title} - Anurag Pradhan`,
-    description: frontMatter.description,
-    image: `${WEBSITE_HOST_URL}${frontMatter.image}`,
-    date: frontMatter.date,
-    type: 'article',
-  };
   return (
-    <Blog customMeta={customMeta}>
+    <Blog>
       <article>
         <h1 className="mb-3 text-gray-900 dark:text-white">
           {frontMatter.title}
@@ -87,11 +80,19 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     },
     scope: data,
   });
+  const customMeta: MetaProps = {
+    title: `${data.title} - Anurag Pradhan`,
+    description: data.description,
+    image: `${WEBSITE_HOST_URL}${data.image}`,
+    date: data.date,
+    type: 'article',
+  };
 
   return {
     props: {
       source: mdxSource,
       frontMatter: data,
+      customMeta,
     },
   };
 };
