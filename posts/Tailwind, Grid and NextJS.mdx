@@ -1,0 +1,75 @@
+---
+title: Tailwind, Grid and NextJS
+description: How I had to research on Tailwind grid, NextJS and other aspects.
+date: '2023-05-22'
+---
+
+Today, I further analysed this project. I decided to add an intro component on the homepage. The idea is that the component should persist while going to a different route, except the blog or `[slug].tsx` route.
+
+The intro component required the use of flexbox or grid. I decided to go with the latter.
+
+For making columns in Tailwind, I could use `grid grid-cols-2`, or in CSS `grid-template-columns: repeat(2, minmax(0, 1fr));`
+
+However, I wanted to the width of the first column to be of the image. Using the previous code, two columns are created, with equal width each.
+
+After some searching, I came across a stack overflow answer on the same question. Finally, I used `className="grid grid-cols-[max-content_max-content] gap-3"`
+
+Here's the final result. I'll modify it over time.
+
+<div className="grid grid-cols-[max-content_max-content] gap-3">
+  <Image
+    className="rounded-lg"
+    src={'/images/anurag.jpg'}
+    width={150}
+    height={150}
+  />
+  <div className="self-end">
+    <h1 className="m-0 font-semibold text-2xl">Anuarg Pradhan</h1>
+    <p className="m-0">Full stack/Android developer</p>
+    <p className="m-0">Documenting my journey here</p>
+  </div>
+</div>
+
+In order to persist this component on route change, I had to fiddle with the project structure, so that I could wrap layouts in `_app.tsx` file. However, the project structure wasn't like that. Layouts weren't used in the \_app file.
+
+Therefore, I restructured the code by making components like Header, Footer, Blog, and placing them in \_app file.
+
+When I checked the dev server, boom, seemed like mdx files weren't being read. On further investigation, I found out that `page` component wasn't receiving `posts` as props from `getStaticProps`. Strangely, getStaticProps did produce the data, but it wasn't taken up by the page component, which received posts as undefined.
+
+On further search, again, stack overflow came to the reque. The problem was, while modifying the `_app.tsx` file, I removed props from the component, component. It caused the issue.
+
+Also, I thought about one more requirement, I wanted the intro component to be rendered with home and about page, but not posts page. I consulted the [next documentation](https://nextjs.org/docs/pages/building-your-application/routing/pages-and-layouts).
+
+The solution was to use component.getLayout function and then, in `_app.tsx` file, conditionally checking everything. The code looks like this:
+
+```tsx:pages/index.js
+import Layout from '../components/layout'
+import NestedLayout from '../components/nested-layout'
+
+export default function Page() {
+  return (
+    /** Your content */
+  )
+}
+
+Page.getLayout = function getLayout(page) {
+  return (
+    <Layout>
+      <NestedLayout>{page}</NestedLayout>
+    </Layout>
+  )
+}
+```
+
+```tsx:pages/_app.js
+export default function MyApp({ Component, pageProps }) {
+  // Use the layout defined at the page level, if available
+  const getLayout = Component.getLayout || ((page) => page);
+
+  return getLayout(<Component {...pageProps} />);
+}
+```
+
+Other then that, I learned more about Next themes. How Tailwind works with it. But, one thing is still unclear. How dark/light theme is managed by the two. The process. I wasn't able to find the information. I'll search more on it later.
+
+Those were main learning for today.
