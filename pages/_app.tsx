@@ -6,6 +6,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Head from '../components/Head';
 import { MetaProps } from './../types/layout';
+import Intro from '../components/Intro';
 
 const MyApp = ({
   Component,
@@ -15,6 +16,7 @@ const MyApp = ({
     <ThemeProvider attribute="class" enableSystem={false} defaultTheme="dark">
       <Head customMeta={pageProps.customMeta} />
       <Header />
+      <Intro />
       <Component {...pageProps} />
       <Footer />
     </ThemeProvider>

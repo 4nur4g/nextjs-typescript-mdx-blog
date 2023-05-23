@@ -8,8 +8,10 @@ export const About = (): JSX.Element => {
 
   return (
     <>
-      <h1>About Page</h1>
-      <p>Welcome to the about page</p>
+      <div className="max-w-2xl px-8 py-4 mx-auto">
+        <h1>About Page</h1>
+        <p>Welcome to the about page</p>
+      </div>
     </>
   );
 };
