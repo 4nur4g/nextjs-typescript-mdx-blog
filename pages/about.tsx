@@ -1,11 +1,8 @@
 import React from 'react';
 import { MetaProps } from '../types/layout';
+import type { GetStaticProps } from 'next';
 
 export const About = (): JSX.Element => {
-  const customMeta: MetaProps = {
-    title: 'About - Anurag Pradhan',
-  };
-
   return (
     <>
       <div className="max-w-2xl px-8 py-4 mx-auto">
@@ -14,6 +11,15 @@ export const About = (): JSX.Element => {
       </div>
     </>
   );
+};
+
+export const getStaticProps: GetStaticProps = async () => {
+  const customMeta: MetaProps = {
+    title: 'About - Anurag Pradhan',
+  };
+  return {
+    props: { customMeta },
+  };
 };
 
 export default About;
